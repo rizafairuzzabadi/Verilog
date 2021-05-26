@@ -1,0 +1,295 @@
+\documentclass[pdftex,12pt,a4paper]{article}
+
+\usepackage{graphicx}  
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{breakcites}
+\usepackage{indentfirst}
+\usepackage{pgfgantt}
+\usepackage{pdflscape}
+\usepackage{float}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage[cmex10]{amsmath}
+\usepackage{stfloats}
+\usepackage{multirow}
+\usepackage{tabto}    
+\usepackage{rotating}
+
+
+\renewcommand{\refname}{REFERENCES}
+\linespread{1.3}
+
+\usepackage{mathtools}
+%\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\thispagestyle{empty}
+\begin{document}
+\begin{titlepage}
+\begin{center}
+\textbf{}\\
+\textbf{\Large{ISTANBUL TECHNICAL UNIVERSITY}}\\
+\vspace{0.5cm}
+\textbf{\Large{COMPUTER ENGINEERING DEPARTMENT}}\\
+\vspace{2cm}
+\textbf{\Large{BLG 242E\\ DIGITAL CIRCUITS LABORATORY\\ EXPERIMENT REPORT}}\\
+\vspace{2.8cm}
+\begin{table}[ht]
+\centering
+\Large{
+\begin{tabular}{lcl}
+\textbf{EXPERIMENT NO}  & : & 4 \\
+\textbf{EXPERIMENT DATE}  & : & 07.04.2021 \\
+\textbf{LAB SESSION}  & : & FRIDAY - 10.30 \\
+\textbf{GROUP NO}  & : & G1 \\
+\end{tabular}}
+\end{table}
+\vspace{1cm}
+\textbf{\Large{GROUP MEMBERS:}}\\
+\begin{table}[ht]
+\centering
+\Large{
+\begin{tabular}{rcl}
+150170908  & : & MUHAMMAD RIZA FAIRUZZABADI \\
+070170364  & : & AİŞE HÜMEYRA BOZ \\
+\end{tabular}}
+\end{table}
+\vspace{2.8cm}
+\textbf{\Large{SPRING 2021}}
+
+\end{center}
+
+\end{titlepage}
+
+\thispagestyle{empty}
+\addtocontents{toc}{\contentsline {section}{\numberline {}FRONT COVER}{}}
+\addtocontents{toc}{\contentsline {section}{\numberline {}CONTENTS}{}}
+\setcounter{tocdepth}{4}
+\tableofcontents
+\clearpage
+
+\setcounter{page}{1}
+
+
+
+
+
+
+\section{INTRODUCTION}
+In this project, we were required to complete two distinct tasks, preliminary and experiment. First in preliminary part, we recalled latches and flip-flops and their differences respectively. Then, we revised SR Latch, SR latch with Enable input and D Flip-Flop alongside with their truth tables. In the experiment part, we implemented all modules. Then we tested them with the given values. 
+
+\section{MATERIALS AND METHODS}
+
+\subsection{MATERIALS}
+\underline{Tools Used}
+\begin{itemize}
+    \item {Vivado Design Suite - Xilinx}
+    \item{Latex (overleaf.com)}
+    \item{Logisim}
+\end{itemize}
+Firstly we recalled the aforementioned topics and noted the important characteristics we have to keep in mind in the implementation of the modules. We then implement and program the logic circuits alongside their NOT,AND,OR gates modules and specific modules that constructed for this experiment in Vivado Design Suite, lastly we used overleaf.com to prepare the report document in LaTex.
+
+\subsection{PRELIMINARY}
+In the preliminary part, we recalled and revised what we learnt in Digital Circuits course. There are some features we have to keep in mind in the implementation of the latches and flip-flops:
+\begin{itemize}
+  \item Basic memory unit keeps on-bit of memory. Flip-flop is a memory unit that is controlled by a clock signal. It is useful because clock determines and controls the circuits structure. It decides when the next output occurs and accordingly output may change.
+  \item While both latches and flip-flops being sequential circuits, they vary in some aspects. Latch do not have a control input which controls the circuit. Its next state only depends on its current state. However, for flip-flops same do not apply.It has two stable states with feedback and control input (clock).
+  \item SR latch has two stable states, has no clock input. The input S 'sets' the output as 1, on the other hand the input 'R' 'resets' the output to 0. When both inputs are 0, the previous state continues. Both inputs should not be 1 at the same time since it results in both Q and Qneg to be 1.
+  \item 
+  
+  \begin{center}
+ \begin{tabular}{|c|c|c|c|c|} 
+ \hline
+ Q(t) & S & R & Q(t+1)  \\ 
+ \hline\hline
+ 0 & 0 & 0 & 0 \\ 
+ \hline
+ 0 & 0 & 1 & 0 \\
+ \hline
+ 0 & 1 & 0 & 1\\
+ \hline
+ 0 & 1 & 1 & X \\
+  \hline
+ 1 & 0 & 0 & 1 \\ 
+ \hline
+ 1 & 0 & 1 & 0 \\
+ \hline
+ 1 & 1 & 0 & 1\\
+ \hline
+ 1 & 1 & 1 & X \\
+ \hline
+\end{tabular}
+\end{center}
+  
+  \item 
+  
+ \begin{center}
+ \begin{tabular}{|c|c|c|c|} 
+ \hline
+ E & S & R & Q(t+1)  \\ 
+ \hline\hline
+ 0 & X & X & Q(t)\\ 
+ \hline
+ 1 & 1 & 0 & 1\\
+ \hline
+ 1 & 0 & 1 & 0\\
+ \hline
+ 1 & 0 & 0 & Q(t) \\
+ \hline
+ 1 & 1 & 1 & forbidden \\
+ \hline
+\end{tabular}
+\end{center}
+  
+  \item 
+  
+  \begin{center}
+ \begin{tabular}{|c|c|c|c|} 
+ \hline
+ D & CLK & Q(t+1) & Q'(t+1)  \\ 
+ \hline\hline
+ 0 & RE* & 0 & 1\\ 
+ \hline
+ 1 & RE* & 1 & 0\\
+ \hline
+ X & 0 & Q(t) & Q'(t)\\
+ \hline
+ X & 1 & Q(t) & Q'(t) \\
+ \hline
+\end{tabular}
+\end{center}
+
+\end{itemize}
+
+
+
+
+
+
+
+\subsection{PART 1}
+In the first part, we were asked to design an SR Latch module using only NAND Gates. Since we were allowed to use the default operations, so we thought firstly that we did not have to use NAND gate module we designed and used in previous experiments, but eventually we realized we had to. The design is rather simple, we have two inputs of S (Set) and R (Reset), and two outputs of Q and Q\_neg. Our initial design in Logisim is as shown in Figure 1. The NAND operation between S' and Q\_neg gives Q, and the NAND operation between R' and Q gives Q\_neg. The fact that both NAND take the Q's values cause the first outputs of this NAND to be X, expectedly. Truth table is as shown in the preliminary part. As can be seen in the simulation result in Figure 3, when both S and R values are 1, both Q and Q\_neg outputs become 1, indicating forbidden inputs are applied. Note that the inputs in the Logisim Initial Design of the SR Latch are supposedly negates, unlike the Elaborated Design (Figure) which values are negated in the process, not before. Lastly, it can be seen in the simulation result that the expected Q values are produced according to the truth table, hence proving the correctness of our implementation.
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Logi1.png}
+	\caption{Logisim Initial Design of SR Latch}
+	\label{fig1}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{Part1Sch.png}
+	\caption{Elaborated Design Schematic of SR Latch }
+	\label{fig1}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{Part1Sim.png}
+	\caption{Simulation of SR Latch}
+	\label{fig1}
+\end{figure}
+
+\subsection{PART 2}
+In the second part, we were asked to design an SR Latch module using only NAND Gates, this time with Enable inputs. Nowwe have three inputs of S, R, and E, and two outputs of Q and Q\_neg. Our initial design in Logisim is as shown in Figure 4. The NAND operation between S' and E gives Qi1, and the NAND operation between E and R gives Qi2. Then we did the same operations we did in previous S-R Latch but this time with Qi1 and Qi2 inputs instead of S and R. Truth table is as shown in the preliminary part. As can be seen in the simulation result in Figure 6, when both S and R values are 1, both Q and Q\_neg outputs become 1, indicating forbidden inputs are applied. The first outputs are again X due to the nonexistence of previous Q values. The Elaborated Design Schematic is as shown in Figure 5. Lastly, it can be seen in the simulation result that the expected Q+1 and Q values are produced according to the truth table, hence proving the correctness of our implementation.
+
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Logi2.png}
+	\caption{Logisim Initial Design of SR Latch with EN}
+	\label{fig1}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{Part2Sch.png}
+	\caption{Elaborated Design Schematic of SR Latch with Enable}
+	\label{fig1}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{Part2Sim.png}
+	\caption{Simulation of SR Latch with Enable}
+	\label{fig1}
+\end{figure}
+
+\begin{center}
+ \begin{tabular}{|c|c|c|c|} 
+ \hline
+ A & B & S & Cout  \\ 
+ \hline\hline
+ 0 & 0 & 0 & 0\\ 
+ \hline
+ 0 & 1 & 1 & 0\\
+ \hline
+ 1 & 0 & 1 & 0\\
+ \hline
+ 1 & 1 & 0 & 1 \\
+ \hline
+\end{tabular}
+\end{center}
+
+\newpage
+\subsection{PART 3}
+In the third part, we were asked to design a D Flip Flop from D-Latches. Since we have not designed a D-Latch in the previous part, we at first designed an D-Latch before implementing the flip-flop. The initial logisim design of the D-Latch and the Flip Flop is as shown in Figure 7 and 8. The design of the D Latch is similar to the previous S-R Latch with EN, with the only different being instead of R, we have a negated D as the third output of the module. Meanwhile the D Flip Flop is implemented by using two of D Latch, which the output of the first being the input D of the second Latch, and with a clock (negated once for the first and twice for the second latch) as Enable inputs. The code implementation of the D Flip FLop is simply two instantiations of the D Latch module. Truth table is as shown in the preliminary part. It is worth noting that for this part in particular, we did not implement a simulation according merely to the truth table, but we try to simulate it with such inputs that it would show its validity in different conditions (ex. that the Q value is actually unchanged unless it is supposed to). As can be seen in the simulation result in Figure 9, in the first 150 ns the Q is only implemented and resetted to 0. Within the 4th 50 ns delay, it can be seen that the Q value isn't set to 1 despite the D(i1) input, due to the clock hasn't been HIGH yet. Though in the next 50 ns, Q value is set to 1, indicating the implementation is true in that case as well. Lastly, it can be seen in the simulation result that the expected Q+1 values are produced after a positive rising edge, indicating the correctness of our implementation in that regard. The Elaborated Design Schematic of D Latch and D Flip Flop are as shown in Figure 9 and 10. Lastly, it can be seen in the simulation result (Figure 11) that the expected Q values are produced in positive rising edge, indicating the correctness of our implementation.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.5\textwidth]{D Latch.png}
+	\caption{Logisim Initial Design of D Latch}
+	\label{fig1}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.5\textwidth]{D Flip Flop.png}
+	\caption{Logisim Initial Design of D Flip Flop}
+	\label{fig1}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{Part3Sch1.png}
+	\caption{Elaborated Design Schematic of D Latch}
+	\label{fig1}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{Part3Sch2.png}
+	\caption{Elaborated Design Schematic of D Flip Flop with D Latches}
+	\label{fig1}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{Part3Sim.png}
+	\caption{Simulation of D Flip Flop}
+	\label{fig1}
+\end{figure}
+
+
+\section{RESULTS }
+We completed the first three tasks we were asked in the experiment. Unfortunately we couldn't do the last part due to lack of time caused by the high amount of other works we have for other lectures this week. However, we plan to do part 4 before the demo at least to ask questions and learn more about it. At first we drew the circuits in Logism, then we got to see their results clearly through simulations. Since we draw and design the expressions in Logisim, it was not hard to validate their correctness through simulations. We added required tables, images, circuits to the specific places materials & methods part of the experiment. Lastly, we supplemented our images namely elaborated design, simulations and truth tables to the report for each part.
+
+
+\section{DISCUSSION }
+In preliminary part, we recalled the concept of flip flop and latches. In the same part we also constructed the truth tables of SR Latches and Flip Flop we were going to implement in the parts after that. We reused the NAND module we designed in the second experiment. We implemented SR Latch with and without EN, and D Flip Flop alongside D Latch. All are done using only NAND modules, with operations like negates are done with the \~ operation. The experiment was rather simple, with the only issue being the time we have this week is too limited, therefore Part 4 is neglected. 
+
+
+\section{CONCLUSION}
+We successfully implemented the modules and simulated them, but unfortunately we did not have enough time to complete part 4. All in all, we learnt how to implement latches and flip-flops from scratch. We successfully simulated all parts and noticed the difference of synchronous sequential circuits. Lastly, we were glad to learn new concepts in Verilog.
+
+\addcontentsline{toc}{section}{\numberline {}REFERENCES}
+
+\bibliographystyle{unsrt}
+\bibliography{reference}
+\nocite{ref1}
+\nocite{overleaf}
+
+\end{document}
+
+
