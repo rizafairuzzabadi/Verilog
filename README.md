@@ -1,0 +1,2 @@
+# Verilog
+ xc7a100tcsg324-1
